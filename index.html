@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Creative Developer</title>
+    <meta name="description" content="Portfolio of a creative developer specializing in building digital experiences.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <header class="header">
+        <a href="#" class="logo">JD<span class="dot">.</span></a>
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="menu-btn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="greeting">Hello, I'm</span>
+            <h1 class="hero-title">John Doe</h1>
+            <h2 class="hero-subtitle">Creative Developer</h2>
+            <p class="hero-description">I build accessible, pixel-perfect, and performant web experiences that merge art
+                with code.</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">View Work</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <pre><code><span class="keyword">const</span> <span class="variable">developer</span> = {
+  <span class="property">name</span>: <span class="string">'John Doe'</span>,
+  <span class="property">skills</span>: [
+    <span class="string">'JavaScript'</span>,
+    <span class="string">'React'</span>,
+    <span class="string">'Node.js'</span>
+  ],
+  <span class="property">hardWorker</span>: <span class="boolean">true</span>,
+  <span class="property">problemSolver</span>: <span class="boolean">true</span>,
+  <span class="function">hire</span>: <span class="keyword">function</span>() {
+    <span class="keyword">return</span> <span class="string">'Let\'s build something amazing!'</span>;
+  }
+};</code></pre>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <!-- Placeholder for user image, using a gradient for now -->
+                <div class="img-placeholder"></div>
+            </div>
+            <div class="about-text">
+                <h3>Passionate about creating digital experiences.</h3>
+                <p>I am a software engineer with a passion for building beautiful and functional web applications. I
+                    have a strong background in both front-end and back-end development, and I am always looking for new
+                    challenges to learn and grow.</p>
+                <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source
+                    projects, or enjoying a good cup of coffee.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fa-brands fa-html5"></i> HTML5</div>
+                    <div class="skill-item"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+                    <div class="skill-item"><i class="fa-brands fa-js"></i> JavaScript</div>
+                    <div class="skill-item"><i class="fa-brands fa-react"></i> React</div>
+                    <div class="skill-item"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fa-brands fa-node"></i> Node.js</div>
+                    <div class="skill-item"><i class="fa-brands fa-python"></i> Python</div>
+                    <div class="skill-item"><i class="fa-solid fa-database"></i> SQL</div>
+                    <div class="skill-item"><i class="fa-brands fa-aws"></i> AWS</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Tools</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fa-brands fa-git-alt"></i> Git</div>
+                    <div class="skill-item"><i class="fa-brands fa-docker"></i> Docker</div>
+                    <div class="skill-item"><i class="fa-brands fa-figma"></i> Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- Project 1 (Large Feature) -->
+            <div class="project-card span-2 span-row-2">
+                <div class="project-img" style="height: 60%;">
+                    <div class="img-placeholder" style="background: linear-gradient(45deg, #ff6b6b, #556270);"></div>
+                </div>
+                <div class="project-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with real-time inventory and secure payments.</p>
+                    <div class="project-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 2 (Standard) -->
+            <div class="project-card">
+                <div class="project-img">
+                    <div class="img-placeholder" style="background: linear-gradient(45deg, #4ecdc4, #556270);"></div>
+                </div>
+                <div class="project-content">
+                    <h3>Task App</h3>
+                    <p>Real-time collaboration tool.</p>
+                    <div class="project-tags">
+                        <span>Vue.js</span>
+                        <span>Firebase</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 3 (Standard) -->
+            <div class="project-card">
+                <div class="project-img">
+                    <div class="img-placeholder" style="background: linear-gradient(45deg, #a8e6cf, #dcedc1);"></div>
+                </div>
+                <div class="project-content">
+                    <h3>AI Gen</h3>
+                    <p>Deep learning art generator.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>TensorFlow</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 4 (Wide) -->
+            <div class="project-card span-2">
+                <div class="project-content"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3>Open Source Contributions</h3>
+                        <p>Active contributor to major web frameworks.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#"><i class="fa-brands fa-github"></i> View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Let's talk about everything!</h3>
+                <p>Don't like forms? Send me an email. 👋</p>
+                <a href="mailto:hello@johndoe.com" class="email-link">hello@johndoe.com</a>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> John Doe. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
