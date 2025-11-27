@@ -404,6 +404,7 @@ section {
     display: flex;
     gap: 3rem;
     margin-top: 2rem;
+    align-items: flex-start;
 }
 
 .stat-item {
@@ -412,13 +413,13 @@ section {
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--primary-color);
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
 }
 
