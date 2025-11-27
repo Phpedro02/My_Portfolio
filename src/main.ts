@@ -15,11 +15,15 @@ if (menuBtn && navbar) {
         menuBtn.classList.toggle('active');
     });
 
-    // Close menu when clicking a link
+    // Close menu when clicking a link and update active state
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navbar.classList.remove('active');
             menuBtn.classList.remove('active');
+            
+            // Update active class on click
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            link.classList.add('active');
         });
     });
 }
@@ -107,3 +111,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Active Navigation Link on Scroll
+const sections = document.querySelectorAll('section[id]');
+
+function updateActiveNav() {
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(section => {
+        const sectionElement = section as HTMLElement;
+        const sectionHeight = sectionElement.offsetHeight;
+        const sectionTop = sectionElement.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+
+    // Handle top of page (home section)
+    if (scrollY < 100) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#home') {
+                link.classList.add('active');
+            }
+        });
+    }
+}
+
+// Update active nav on scroll
+window.addEventListener('scroll', updateActiveNav);
+// Also update on page load
+updateActiveNav();
