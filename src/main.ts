@@ -33,35 +33,52 @@ const cursorDot = document.querySelector('[data-cursor-dot]') as HTMLElement;
 const cursorOutline = document.querySelector('[data-cursor-outline]') as HTMLElement;
 
 if (cursorDot && cursorOutline) {
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+    
+    // Update mouse position
     window.addEventListener('mousemove', (e: MouseEvent) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
-
-        // Add some lag to the outline for a smooth feel
-        cursorOutline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
+    
+    // Animate cursor with requestAnimationFrame for better performance
+    function animateCursor() {
+        // Instant dot movement
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+        
+        // Smooth outline movement with lerp
+        const speed = 0.15;
+        outlineX += (mouseX - outlineX) * speed;
+        outlineY += (mouseY - outlineY) * speed;
+        
+        cursorOutline.style.left = `${outlineX}px`;
+        cursorOutline.style.top = `${outlineY}px`;
+        
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
 
-    // Add hover effect to interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-category');
-
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
+    // Add hover effect to interactive elements using event delegation
+    document.body.addEventListener('mouseover', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a, button, .project-card, .skill-category')) {
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
             cursorOutline.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
             cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-        });
+        }
+    });
 
-        el.addEventListener('mouseleave', () => {
+    document.body.addEventListener('mouseout', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const relatedTarget = e.relatedTarget as HTMLElement;
+        if (target.closest('a, button, .project-card, .skill-category') && 
+            !relatedTarget?.closest('a, button, .project-card, .skill-category')) {
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
             cursorOutline.style.backgroundColor = 'transparent';
             cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
+        }
     });
 }
 
@@ -76,19 +93,22 @@ const revealObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.15
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
 });
 
 revealElements.forEach(el => {
-    (el as HTMLElement).style.opacity = '0';
-    (el as HTMLElement).style.transform = 'translateY(30px)';
-    (el as HTMLElement).style.transition = 'all 0.8s ease';
     revealObserver.observe(el);
 });
 
 // Add revealed class styles dynamically
 const styleSheet = document.createElement("style");
 styleSheet.textContent = `
+    .project-card, .skill-category, .about-text, .contact-container {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+    }
     .revealed {
         opacity: 1 !important;
         transform: translateY(0) !important;
@@ -114,6 +134,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Active Navigation Link on Scroll
 const sections = document.querySelectorAll('section[id]');
+
+// Throttle function for better performance
+function throttle(func: Function, delay: number) {
+    let timeoutId: number | null = null;
+    let lastExecTime = 0;
+    
+    return function(this: any, ...args: any[]) {
+        const currentTime = Date.now();
+        
+        if (currentTime - lastExecTime >= delay) {
+            func.apply(this, args);
+            lastExecTime = currentTime;
+        } else {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            timeoutId = window.setTimeout(() => {
+                func.apply(this, args);
+                lastExecTime = Date.now();
+            }, delay - (currentTime - lastExecTime));
+        }
+    };
+}
 
 function updateActiveNav() {
     const scrollY = window.pageYOffset;
@@ -145,7 +188,7 @@ function updateActiveNav() {
     }
 }
 
-// Update active nav on scroll
-window.addEventListener('scroll', updateActiveNav);
+// Update active nav on scroll with throttling
+window.addEventListener('scroll', throttle(updateActiveNav, 100));
 // Also update on page load
 updateActiveNav();
