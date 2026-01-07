@@ -61,9 +61,11 @@ if (cursorDot && cursorOutline) {
     animateCursor();
 
     // Add hover effect to interactive elements using event delegation
+    const interactiveSelector = 'a, button, .project-card, .skill-category';
+    
     document.body.addEventListener('mouseover', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (target.closest('a, button, .project-card, .skill-category')) {
+        if (target.closest(interactiveSelector)) {
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
             cursorOutline.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
             cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
@@ -73,8 +75,8 @@ if (cursorDot && cursorOutline) {
     document.body.addEventListener('mouseout', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         const relatedTarget = e.relatedTarget as HTMLElement;
-        if (target.closest('a, button, .project-card, .skill-category') && 
-            !relatedTarget?.closest('a, button, .project-card, .skill-category')) {
+        if (target.closest(interactiveSelector) && 
+            !relatedTarget?.closest(interactiveSelector)) {
             cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
             cursorOutline.style.backgroundColor = 'transparent';
             cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -136,11 +138,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const sections = document.querySelectorAll('section[id]');
 
 // Throttle function for better performance
-function throttle(func: Function, delay: number) {
-    let timeoutId: number | null = null;
+function throttle<T extends (...args: any[]) => void>(func: T, delay: number): (...args: Parameters<T>) => void {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastExecTime = 0;
     
-    return function(this: any, ...args: any[]) {
+    return function(this: any, ...args: Parameters<T>) {
         const currentTime = Date.now();
         
         if (currentTime - lastExecTime >= delay) {
@@ -150,7 +152,7 @@ function throttle(func: Function, delay: number) {
             if (timeoutId) {
                 clearTimeout(timeoutId);
             }
-            timeoutId = window.setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 func.apply(this, args);
                 lastExecTime = Date.now();
             }, delay - (currentTime - lastExecTime));
